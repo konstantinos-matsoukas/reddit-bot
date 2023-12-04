@@ -11,14 +11,20 @@ def bot_login():
     return r
 
 def run_bot(r):
+    print ("obtaining comments")
+
+    comments_replied_to = []
+
     for comment in r.subreddit('test').comments(limit=25):
         if "dog" in comment.body:
             print ("test")
             comment.reply("test response")
             print ("responded")
+            comments_replied_to.append(comment.id) 
 
     time.sleep(10)
 
 
 r = bot_login()
-run_bot(r)
+while True:
+    run_bot(r)

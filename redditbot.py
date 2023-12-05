@@ -22,7 +22,7 @@ def run_bot(r,comments_replied_to):
             comments_replied_to.append(comment.id) 
 
     time.sleep(10)
-
+#file func
 def get_saved_comments():
     with open("comments_replied_to.txt",r)as f:
         comments_replied_to = f.read()

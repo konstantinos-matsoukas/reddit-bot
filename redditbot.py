@@ -10,12 +10,11 @@ def bot_login():
                 user_agent = "Nuggets test app v0.1")
     return r
 
-def run_bot(r):
+def run_bot(r,comments_replied_to):
     print ("obtaining comments")
 
-    comments_replied_to = []
 
-    for comment in r.subreddit('test').comments(limit=25):
+    for comment in r.subreddit('subreddit').comments(limit=25) and comment.id not in comments_replied_to and comment.author != user.me():
         if "dog" in comment.body:
             print ("test")
             comment.reply("test response")
@@ -24,7 +23,13 @@ def run_bot(r):
 
     time.sleep(10)
 
+def get_saved_comments():
+    with open("comments_replied_to.txt",r)as f:
+        comments_replied_to = f.read()
+        comments_replied_to = comments_replied_to.split("\n")
 
 r = bot_login()
+
+comments_replied_to = []
 while True:
-    run_bot(r)
+    run_bot(r,comments_replied_to)

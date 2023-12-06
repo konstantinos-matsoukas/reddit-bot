@@ -22,6 +22,9 @@ def run_bot(r,comments_replied_to):
             print ("responded")
             comments_replied_to.append(comment.id) 
 
+            with open("comments_replied_to.txt","a") as f:
+                f.write(comment.id + "\n")
+
     time.sleep(10)
 #file func
 def get_saved_comments():
@@ -31,6 +34,8 @@ def get_saved_comments():
         with open("comments_replied_to.txt",r)as f:
             comments_replied_to = f.read()
             comments_replied_to = comments_replied_to.split("\n")
+            comments_replied_to = comments_replied_to.split("\n")
+            comments_replied_to = filter(None, comments_replied_to)
         
     return comments_replied_to
 
